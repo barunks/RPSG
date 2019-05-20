@@ -1,5 +1,10 @@
 package imc.game;
 
+/**
+ * 
+ * GameSummary class manage Win, Lose and Tie counting for each move
+ *
+ */
 public class GameSummary {
 	private int countWin;
 	private int countLose;

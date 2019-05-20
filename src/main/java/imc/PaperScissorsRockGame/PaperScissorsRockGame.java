@@ -5,6 +5,7 @@ import imc.player.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Random;
 
 public class PaperScissorsRockGame {
 
@@ -16,11 +17,11 @@ public class PaperScissorsRockGame {
 		 // Initialize PlayerList
 		 ArrayList<AbstractPlayer> playerList = new ArrayList<AbstractPlayer>(); 
 		 Scanner scanner = new Scanner(System.in);
-		// First Player is RealPlayer with name as Human
+		 Random randomNumber = new Random();
+		// Player1 and Player2  are instantiated
 		 playerList.add(new RealPlayer("Human", scanner));
-		// Second Player is ComputerPlayer with name as Computer
-		 playerList.add(new ComputerPlayer("Computer"));
-		 // Instantiate gameEngine instance with PlayerList and GameSummary as input parameter
+		 playerList.add(new ComputerPlayer("Computer", randomNumber));
+		 // Instantiate gameEngine instance for PlayerList and GameSummary as input parameter
 		 try {
 			 CoreGameEngine gameEngine = new CoreGameEngine(playerList, new GameSummary());
 			 char exitGame = 'N';
@@ -28,6 +29,7 @@ public class PaperScissorsRockGame {
 				 int n = inputNumberOfPlays(scanner);
 				 System.out.println("\n Game started. Each Player will play " + n + " moves");
 				 gameEngine.playSession(n);
+				 gameEngine.playReset(); // Reset game before every new game starts
 				 System.out.println("\n Do you want to Exit? Press 'N' or 'n' to continue else press any other key to continue");
 				 exitGame = scanner.nextLine().toUpperCase().charAt(0);
 			 }

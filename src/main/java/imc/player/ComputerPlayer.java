@@ -6,10 +6,10 @@ public class ComputerPlayer extends AbstractPlayer {
 	
 	private Random randomNumber;
 
-	public ComputerPlayer(String name) {
+	public ComputerPlayer(String name, Random randomNumber) {
 		super();
 		this.setName(name);
-		randomNumber = new Random();
+		this.randomNumber = randomNumber;
 	}
 	
 	public HANDSIGN makeMove() {

@@ -6,9 +6,14 @@ import imc.player.AbstractPlayer;
 import imc.player.AbstractPlayer.HANDSIGN;
 import java.util.ArrayList;
 
+/**
+ * 
+ * CoreGameEngine class requires two players and game summary
+ * 
+ */
 public class CoreGameEngine {
 	
-	private enum RESULT {WIN, LOSE, TIE, NONE}
+	public enum RESULT {WIN, LOSE, TIE, NONE}
 	private ArrayList<AbstractPlayer> players;
 	private GameSummary summary;
 	
@@ -23,34 +28,21 @@ public class CoreGameEngine {
     }
 	
 	public void playSession(int n) {
-
+        // Run game for each pass
 		for (int i = 0; i < n; i++) {
 			run();
 	    }
-
+	}
+	
+	public void playReset() {
+		// Before new game, Reset is required as refresh
 	    System.out.println("\nGame Successfully Completed!");
 	    System.out.println("\nGame Summary:");
 	    System.out.println(summary.toString());
 	    summary.reset();
 	}
 	
-	private void run() {
-
-		for (AbstractPlayer player : players ) {
-			player.setCurrentMove(player.makeMove());
-		}
-		
-		individualGameRun();
-    }
-	
-	private void individualGameRun() {
-		 // Abstract Player1 and Player2  for their move and find the result
-		 AbstractPlayer player1 = players.get(0);
-		 AbstractPlayer player2 = players.get(1);
-		 updateResult(player1, player2, getGameResult(player1.getCurrentMove(), player2.getCurrentMove()));
-	 }
-	
-	private RESULT getGameResult(HANDSIGN move1, HANDSIGN move2) {
+	public RESULT getIndividualMoveResult(HANDSIGN move1, HANDSIGN move2) {
 		
 		if (move1 == move2) return RESULT.TIE;
 		
@@ -67,6 +59,22 @@ public class CoreGameEngine {
 		
 		return RESULT.NONE;
 	}
+	
+	private void run() {
+		// Make move by each individual Player
+		for (AbstractPlayer player : players ) {
+			player.setCurrentMove(player.makeMove());
+		}
+		
+		individualMoveRun();
+    }
+	
+	private void individualMoveRun() {
+		 // Player1 and Player2 make individual move and then results updated
+		 AbstractPlayer player1 = players.get(0);
+		 AbstractPlayer player2 = players.get(1);
+		 updateResult(player1, player2, getIndividualMoveResult(player1.getCurrentMove(), player2.getCurrentMove()));
+	 }
 	
 	private void updateResult(AbstractPlayer player1, AbstractPlayer player2, RESULT result) {
 		 String handSignString1 = player1.getName() + "=>" + player1.getHandSignInString();
