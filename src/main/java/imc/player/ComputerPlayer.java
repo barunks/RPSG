@@ -2,33 +2,34 @@ package imc.player;
 
 import java.util.Random;
 
-public class ComputerPlayer extends AbstractPlayer {
-	
-	private Random randomNumber;
+import imc.inputadapter.InputAdapter;
 
-	public ComputerPlayer(String name, Random randomNumber) {
+public class ComputerPlayer extends AbstractPlayer {
+
+	private InputAdapter<String> inputSource;
+
+	public ComputerPlayer(String name, InputAdapter<String> inputSource) {
 		super();
 		this.setName(name);
-		this.randomNumber = randomNumber;
+		this.inputSource = inputSource;
 	}
-	
+
 	public HANDSIGN makeMove() {
-        
-        HANDSIGN option = HANDSIGN.SCISSORS;
-        int choice = 1 + randomNumber.nextInt(HANDSIGN.values().length);
 
-        switch (choice) {
-            case 1:
-            	option =  HANDSIGN.ROCK;
-            	break;
-            case 2:
-            	option =  HANDSIGN.PAPER;
-            	break;
-            default:
-            	break;
-        }
+		HANDSIGN option = HANDSIGN.SCISSORS;
 
-        return option;
-    }
+		switch (inputSource.nextInput()) {
+			case "1":
+				option = HANDSIGN.ROCK;
+				break;
+			case "2":
+				option = HANDSIGN.PAPER;
+				break;
+			default:
+				break;
+		}
+
+		return option;
+	}
 
 }

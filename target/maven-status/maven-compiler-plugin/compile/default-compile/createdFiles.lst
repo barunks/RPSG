@@ -1,0 +1,11 @@
+imc\player\ComputerPlayer.class
+imc\exception\PlayerNumberException.class
+imc\game\CoreGameEngine$1.class
+imc\player\AbstractPlayer$HANDSIGN.class
+imc\game\CoreGameEngine$RESULT.class
+imc\paperscissorsrockgame\PaperScissorsRockGame.class
+imc\game\CoreGameEngine.class
+imc\player\AbstractPlayer$1.class
+imc\game\GameSummary.class
+imc\player\AbstractPlayer.class
+imc\player\RealPlayer.class
